@@ -21,7 +21,7 @@ tally = {}
 # --------------------------------------------------------------------------------------
 
 # Function that tallys the votes
-def analyse_election(datarow, tally):
+def tally_votes(datarow, tally):
     # Interpret / retrieve data values
     candidate = datarow[2]
     ballot_id = datarow[0]
@@ -45,7 +45,7 @@ with open(election_data_csv, 'r') as csvfile:
 
     # Iterate over the data
     for datarow in csvreader:
-        analyse_election(datarow, tally)
+        tally_votes(datarow, tally)
 
 # --------------------------------------------------------------------------------------
 
