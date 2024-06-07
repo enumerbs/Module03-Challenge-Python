@@ -72,43 +72,37 @@ with open(budget_data_csv, 'r') as csvfile:
     for datarow in csvreader:
         analyse_datarow(datarow, results)
 
-    # Close the file handle
-    csvfile.close()
-
-
 # --------------------------------------------------------------------------------------
 
 # Format then output financial analysis results
 
-str_total_months = f"Total months: {results['num_months']}"
-str_total = f"Total: ${results['net_profit_loss']:.0f}"
-str_average_change = f"Average Change: ${results['average_change']:.2f}"
-str_greatest_increase_details = f"Greatest Increase in Profits: {results['greatest_increase_date']} (${results['greatest_increase']:.0f})"
-str_greatest_decrease_details = f"Greatest Decrease in Profits: {results['greatest_decrease_date']} (${results['greatest_decrease']:.0f})"
+str_total_months = f"Total months: {results['num_months']}" + "\n"
+str_total = f"Total: ${results['net_profit_loss']:.0f}" + "\n"
+str_average_change = f"Average Change: ${results['average_change']:.2f}" + "\n"
+str_greatest_increase_details = f"Greatest Increase in Profits: {results['greatest_increase_date']} (${results['greatest_increase']:.0f})" + "\n"
+str_greatest_decrease_details = f"Greatest Decrease in Profits: {results['greatest_decrease_date']} (${results['greatest_decrease']:.0f})" + "\n"
 
 # Output to the console...
 
 print("Financial Analysis")
 print("----------------------------")
-print(str_total_months + "\n")
-print(str_total + "\n")
-print(str_average_change + "\n")
-print(str_greatest_increase_details + "\n")
-print(str_greatest_decrease_details + "\n")
+print(str_total_months)
+print(str_total)
+print(str_average_change)
+print(str_greatest_increase_details)
+print(str_greatest_decrease_details)
 
 # ..and to a file.
 
 with open(financial_analysis_txt, 'w') as txtfile:
     # Output results header
-    txtfile.write("Financial Analysis\n")
-    txtfile.write("----------------------------\n")
+    print("Financial Analysis", file=txtfile)
+    print("----------------------------", file=txtfile)
     # Output results statistics
-    txtfile.write(str_total_months + "\n\n")
-    txtfile.write(str_total + "\n\n")
-    txtfile.write(str_average_change + "\n\n")
-    txtfile.write(str_greatest_increase_details + "\n\n")
-    txtfile.write(str_greatest_decrease_details + "\n\n")
-    # Close the file handle
-    txtfile.close()
+    print(str_total_months, file=txtfile)
+    print(str_total, file=txtfile)
+    print(str_average_change, file=txtfile)
+    print(str_greatest_increase_details, file=txtfile)
+    print(str_greatest_decrease_details, file=txtfile)
 
 # --------------------------------------------------------------------------------------
