@@ -23,6 +23,7 @@ The following references were used in the development of the solution for this C
 
 ## Python patterns
 - Coding patterns for "Reading and Writing in Python": Data Analytics Boot Camp - Module 3, Lesson 2 class notes.
+- https://blog.enterprisedna.co/python-write-to-file/
 
 ## Python f-string formatting
 - https://jerrynsh.com/3-useful-python-f-string-tricks-you-probably-dont-know/
