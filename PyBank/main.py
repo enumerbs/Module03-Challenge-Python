@@ -6,6 +6,9 @@ import csv
 # Path to collect data from this project's Resources folder
 budget_data_csv = os.path.join("PyBank", "Resources", "budget_data.csv")
 
+# Path to finanaical analysis results file
+financial_analysis_txt = os.path.join("PyBank", "analysis", "financial_analysis.txt")
+
 # --------------------------------------------------------------------------------------
 
 # Intermediate data store for financial analysis results
@@ -24,7 +27,7 @@ results = {
 
 # --------------------------------------------------------------------------------------
 
-# Function that calculates & outputs financial analysis per row in the data file
+# Function that calculates the financial analysis on a per-row (monthly) basis
 def analyse_datarow(datarow, results):
     # Interpret / retrieve data values
     date = datarow[0]
@@ -54,7 +57,6 @@ def analyse_datarow(datarow, results):
     # Update the reference value for calculating the next change
     results['prev_profit_loss'] = this_month_profit_loss
 
-
 # --------------------------------------------------------------------------------------
 
 # Read in and process the CSV data file
@@ -73,10 +75,37 @@ with open(budget_data_csv, 'r') as csvfile:
 
 # --------------------------------------------------------------------------------------
 
-# Output financial analysis results
+# Format then output financial analysis results
 
-print(f"{results['num_months']}")
-print(f"{results['net_profit_loss']}")
-print(f"{results['average_change']}")
-print(f"Greatest increase {results['greatest_increase_date']} {results['greatest_increase']} ")
-print(f"Greatest decrease {results['greatest_decrease_date']} {results['greatest_decrease']} ")
+str_total_months = f"Total months: {results['num_months']}"
+str_total = f"Total: ${results['net_profit_loss']:.0f}"
+str_average_change = f"Average Change: ${results['average_change']:.2f}"
+str_greatest_increase_details = f"Greatest Increase in Profits: {results['greatest_increase_date']} (${results['greatest_increase']:.0f})"
+str_greatest_decrease_details = f"Greatest Decrease in Profits: {results['greatest_decrease_date']} (${results['greatest_decrease']:.0f})"
+
+# Output to the console...
+
+print("Financial Analysis")
+print("----------------------------")
+print(str_total_months + "\n")
+print(str_total + "\n")
+print(str_average_change + "\n")
+print(str_greatest_increase_details + "\n")
+print(str_greatest_decrease_details + "\n")
+
+# ..and to a file.
+
+with open(financial_analysis_txt, 'w') as txtfile:
+    # Output results header
+    txtfile.write("Financial Analysis\n")
+    txtfile.write("----------------------------\n")
+    # Output results statistics
+    txtfile.write(str_total_months + "\n\n")
+    txtfile.write(str_total + "\n\n")
+    txtfile.write(str_average_change + "\n\n")
+    txtfile.write(str_greatest_increase_details + "\n\n")
+    txtfile.write(str_greatest_decrease_details + "\n\n")
+    # Close the file handle
+    txtfile.close()
+
+# --------------------------------------------------------------------------------------
