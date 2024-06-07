@@ -72,6 +72,9 @@ with open(budget_data_csv, 'r') as csvfile:
     for datarow in csvreader:
         analyse_datarow(datarow, results)
 
+    # Close the file handle
+    csvfile.close()
+
 
 # --------------------------------------------------------------------------------------
 
